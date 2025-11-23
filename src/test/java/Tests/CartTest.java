@@ -86,4 +86,13 @@ public class CartTest extends BaseTest {
         assertEquals(firstItemPriceNumbersDouble, addedItemPriceDouble,
                 "цена выбранного товара не соответствует цене товара в корзине");
     }
+
+    @Test
+    void itemsDescriptionIsDisplayed() {
+        inventoryPage.authorizeAndGoToInventaryPage();
+        inventoryPage.putProductInCart();
+        driver.findElement(By.xpath("//a[@class='shopping_cart_link']")).click();
+        boolean itemsDescriptionIsDisplayed = driver.findElement(By.cssSelector(".inventory_item_desc")).isDisplayed();
+        assertTrue(itemsDescriptionIsDisplayed, "Описание товара не отображается");
+    }
 }
