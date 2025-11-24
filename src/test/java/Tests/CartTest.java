@@ -27,7 +27,7 @@ public class CartTest extends BaseTest {
         boolean checkoutButtonIsDisplayed = driver.findElement
                 (By.xpath("//button[@data-test='checkout' and text()='Checkout']")).isDisplayed();
 
-        assertTrue(checkoutButtonIsDisplayed, "кнопка 'Checkout' не отображается");
+        assertTrue(checkoutButtonIsDisplayed, "кнопка Checkout не отображается");
     }
 
     @Test
@@ -38,7 +38,7 @@ public class CartTest extends BaseTest {
                         (By.xpath("//button[@data-test='continue-shopping' and text()='Continue Shopping']"))
                 .isDisplayed();
 
-        assertTrue(continueShoppingButtonIsDisplayed, "кнопка 'Continue Shopping' не отображается");
+        assertTrue(continueShoppingButtonIsDisplayed, "кнопка Continue Shopping не отображается");
     }
 
     @Test
