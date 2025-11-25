@@ -37,7 +37,7 @@ public class InventoryTest extends BaseTest {
         inventoryPage.open();
         inventoryPage.cartButtonIsDisplayed();
 
-        assertTrue(inventoryPage.inventoryPageIsOpen(), "кнопка корзины не отображается");
+        assertTrue(inventoryPage.cartButtonIsDisplayed(), "кнопка корзины не отображается");
     }
 }
 
