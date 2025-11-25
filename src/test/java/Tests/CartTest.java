@@ -2,6 +2,8 @@ package Tests;
 
 import Pages.CartPage;
 import Pages.InventoryPage;
+
+import Pages.Utils.FormatingUtils;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
@@ -11,6 +13,7 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class CartTest extends BaseTest {
+
 
     @Test
     void checkoutButtonIsDisplayed() {
@@ -54,25 +57,16 @@ public class CartTest extends BaseTest {
         List<WebElement> itemsNamesList = driver.findElements(InventoryPage.ITEMS_PRICES);
         String firstItemPrice = itemsNamesList.get(0).getText();
         String firstItemPriceNumbers = firstItemPrice.substring(1);
-        Double firstItemPriceNumbersDouble = null;
-        try {
-            firstItemPriceNumbersDouble = Double.parseDouble(firstItemPriceNumbers);
-        } catch (NumberFormatException e) {
-            System.err.println("Invalid string format: " + e.getMessage());
-        }
+        double firstItemDoublePrice = FormatingUtils.parseDouble(firstItemPriceNumbers);
         addToCartButtonsList.get(0).click();
         cartpage.clickOnCartLink();
         String addedItemPrice = driver.findElement(CartPage.ADDEED_TO_CART_ITEM_PRICE)
                 .getText();
         String addedItemPriceNumbers = addedItemPrice.substring(1);
-        Double addedItemPriceDouble = null;
-        try {
-            addedItemPriceDouble = Double.parseDouble(addedItemPriceNumbers);
-        } catch (NumberFormatException e) {
-            System.err.println("Invalid string format: " + e.getMessage());
-        }
+        double addedItemPriceDouble = FormatingUtils.parseDouble(addedItemPriceNumbers);
 
-        assertEquals(firstItemPriceNumbersDouble, addedItemPriceDouble,
+        assertEquals(firstItemDoublePrice, addedItemPriceDouble,
                 "цена выбранного товара не соответствует цене товара в корзине");
     }
 }
+
