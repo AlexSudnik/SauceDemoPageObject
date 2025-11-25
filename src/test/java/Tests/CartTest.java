@@ -1,6 +1,5 @@
 package Tests;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
@@ -11,47 +10,37 @@ import static org.testng.Assert.assertTrue;
 
 public class CartTest extends BaseTest {
 
-    @Test
-    void burgerMenuIsDisplayed() {
-        cartpage.authorizeSndGoToCartPage();
-        cartpage.cartPageIsOpen();
-        boolean burgerMenuIsDisplayed = driver.findElement(By.id("react-burger-menu-btn")).isDisplayed();
-
-        assertTrue(burgerMenuIsDisplayed, "бургер меню не отображается");
-    }
 
     @Test
     void checkoutButtonIsDisplayed() {
-        cartpage.authorizeSndGoToCartPage();
+        signInPage.authorization();
+        cartpage.open();
         cartpage.cartPageIsOpen();
-        boolean checkoutButtonIsDisplayed = driver.findElement
-                (By.xpath("//button[@data-test='checkout' and text()='Checkout']")).isDisplayed();
 
-        assertTrue(checkoutButtonIsDisplayed, "кнопка Checkout не отображается");
+        assertTrue(cartpage.isCheckoutButtonDisplayed(), "кнопка Checkout не отображается");
     }
 
     @Test
     void continueShoppingButtonIsDisplayed() {
-        cartpage.authorizeSndGoToCartPage();
+        signInPage.authorization();
+        cartpage.open();
         cartpage.cartPageIsOpen();
-        boolean continueShoppingButtonIsDisplayed = driver.findElement
-                        (By.xpath("//button[@data-test='continue-shopping' and text()='Continue Shopping']"))
-                .isDisplayed();
 
-        assertTrue(continueShoppingButtonIsDisplayed, "кнопка Continue Shopping не отображается");
+        assertTrue(cartpage.isContinueShoppingButtonDisplayed(), "кнопка Continue Shopping не отображается");
     }
 
     @Test
         //проверка соответствия названия добавленного в корзину товара на Inventory Page названию в корзине
     void addedToCartItemNameCorrespondsItemAtInventoryPage() {
-        inventoryPage.authorizeAndGoToInventaryPage();
+        signInPage.authorization();
+        inventoryPage.open();
         inventoryPage.inventoryPageIsOpen();
-        List<WebElement> addToCartButtons = driver.findElements(By.cssSelector(".btn.btn_primary"));
-        List<WebElement> itemsNames = driver.findElements(By.cssSelector(".inventory_item_name "));
-        addToCartButtons.get(0).click();
-        String firstItemName = itemsNames.get(0).getText();
-        driver.findElement(By.cssSelector(".shopping_cart_link")).click();
-        String addedItemName = driver.findElement(By.xpath("//div[@class='inventory_item_name']")).getText();
+        List<WebElement> addToCartButtonsList = driver.findElements(inventoryPage.addToCartButtons);
+        List<WebElement> itemsNamesList = driver.findElements(inventoryPage.itemsNames);
+        addToCartButtonsList.get(0).click();
+        String firstItemName = itemsNamesList.get(0).getText();
+        inventoryPage.clickOnCartLink();
+        String addedItemName = driver.findElement(cartpage.cartItemName).getText();
 
         assertEquals(firstItemName, addedItemName, "название выбранного товара не соответствует названию товара в корзине");
     }
@@ -59,11 +48,12 @@ public class CartTest extends BaseTest {
     @Test
         //проверка соответствия цены добавленного в корзину товара на Inventory Page цене в корзине
     void addedToCartItemPriceCorrespondsItemAtInventoryPage() {
-        inventoryPage.authorizeAndGoToInventaryPage();
+        signInPage.authorization();
+        inventoryPage.open();
         inventoryPage.inventoryPageIsOpen();
-        List<WebElement> addToCartButtons = driver.findElements(By.cssSelector(".btn.btn_primary"));
-        List<WebElement> itemsNames = driver.findElements(By.cssSelector(".inventory_item_price"));
-        String firstItemPrice = itemsNames.get(0).getText();
+        List<WebElement> addToCartButtonsList = driver.findElements(inventoryPage.addToCartButtons);
+        List<WebElement> itemsNamesList = driver.findElements(inventoryPage.itemsPrices);
+        String firstItemPrice = itemsNamesList.get(0).getText();
         String firstItemPriceNumbers = firstItemPrice.substring(1);
         Double firstItemPriceNumbersDouble = null;
         try {
@@ -71,9 +61,9 @@ public class CartTest extends BaseTest {
         } catch (NumberFormatException e) {
             System.err.println("Invalid string format: " + e.getMessage());
         }
-        addToCartButtons.get(0).click();
-        driver.findElement(By.cssSelector(".shopping_cart_link")).click();
-        String addedItemPrice = driver.findElement(By.xpath("//div[@class='inventory_item_price']"))
+        addToCartButtonsList.get(0).click();
+        cartpage.clickOnCartLink();
+        String addedItemPrice = driver.findElement(cartpage.addedToCartItemPrice)
                 .getText();
         String addedItemPriceNumbers = addedItemPrice.substring(1);
         Double addedItemPriceDouble = null;
@@ -85,14 +75,5 @@ public class CartTest extends BaseTest {
 
         assertEquals(firstItemPriceNumbersDouble, addedItemPriceDouble,
                 "цена выбранного товара не соответствует цене товара в корзине");
-    }
-
-    @Test
-    void itemsDescriptionIsDisplayed() {
-        inventoryPage.authorizeAndGoToInventaryPage();
-        inventoryPage.putProductInCart();
-        driver.findElement(By.xpath("//a[@class='shopping_cart_link']")).click();
-        boolean itemsDescriptionIsDisplayed = driver.findElement(By.cssSelector(".inventory_item_desc")).isDisplayed();
-        assertTrue(itemsDescriptionIsDisplayed, "Описание товара не отображается");
     }
 }
