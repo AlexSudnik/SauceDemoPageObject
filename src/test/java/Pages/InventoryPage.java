@@ -9,13 +9,11 @@ import java.util.List;
 public class InventoryPage extends BasePage {
 
     private static final By TITLE = By.xpath("//span[@data-test='title' and text()='Products']");
-    public By CART_LINK = By.cssSelector(".shopping_cart_link");
+    private static final By CART_LINK = By.cssSelector(".shopping_cart_link");
     private static final By PRODUCTS_ON_INVENTORY_TITLES = By.cssSelector(".inventory_item_description");
-    private static final By PRODUCTS_ON_INVENTORY_PRICES = By.cssSelector(".inventory_item_price");
-
-    public By addToCartButtons = By.cssSelector(".btn.btn_primary");
-    public By itemsPrices = By.cssSelector(".inventory_item_price");
-    public By itemsNames = By.cssSelector(".inventory_item_name ");
+    public static final By ADD_TO_CART_BUTTONS = By.cssSelector(".btn.btn_primary");
+    public static final By ITEMS_PRICES = By.cssSelector(".inventory_item_price");
+    public static final By ITEMS_NAMES = By.cssSelector(".inventory_item_name ");
 
     public InventoryPage(WebDriver driver) {
         super(driver);
@@ -39,7 +37,7 @@ public class InventoryPage extends BasePage {
     }
 
     public Integer getProductsOnInventoryPricesSize() {
-        List<WebElement> productsOnInventoryPagePrices = driver.findElements(PRODUCTS_ON_INVENTORY_PRICES);
+        List<WebElement> productsOnInventoryPagePrices = driver.findElements(ITEMS_PRICES);
         return productsOnInventoryPagePrices.size();
     }
 

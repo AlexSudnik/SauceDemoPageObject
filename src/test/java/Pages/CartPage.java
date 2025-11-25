@@ -10,8 +10,8 @@ public class CartPage extends BasePage {
     private static final By CONTINUE_SHOPPING_BUTTON = By.xpath
             ("//button[@data-test='continue-shopping' and text()='Continue Shopping']");
     public static final By CART_LINK = By.cssSelector(".shopping_cart_link");
-    public final By addedToCartItemPrice = By.xpath("//div[@class='inventory_item_price']");
-    public final By cartItemName = By.xpath("//div[@class='inventory_item_name']");
+    public static final By ADDEED_TO_CART_ITEM_PRICE = By.xpath("//div[@class='inventory_item_price']");
+    public static final By CART_ITEM_NAME = By.xpath("//div[@class='inventory_item_name']");
 
 
     public CartPage(WebDriver driver) {

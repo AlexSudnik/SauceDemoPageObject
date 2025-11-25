@@ -1,5 +1,7 @@
 package Tests;
 
+import Pages.CartPage;
+import Pages.InventoryPage;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
@@ -33,12 +35,12 @@ public class CartTest extends BaseTest {
         signInPage.authorization();
         inventoryPage.open();
         inventoryPage.inventoryPageIsOpen();
-        List<WebElement> addToCartButtonsList = driver.findElements(inventoryPage.addToCartButtons);
-        List<WebElement> itemsNamesList = driver.findElements(inventoryPage.itemsNames);
+        List<WebElement> addToCartButtonsList = driver.findElements(InventoryPage.ADD_TO_CART_BUTTONS);
+        List<WebElement> itemsNamesList = driver.findElements(InventoryPage.ITEMS_NAMES);
         addToCartButtonsList.get(0).click();
         String firstItemName = itemsNamesList.get(0).getText();
         inventoryPage.clickOnCartLink();
-        String addedItemName = driver.findElement(cartpage.cartItemName).getText();
+        String addedItemName = driver.findElement(CartPage.CART_ITEM_NAME).getText();
 
         assertEquals(firstItemName, addedItemName, "название выбранного товара не соответствует названию товара в корзине");
     }
@@ -49,8 +51,8 @@ public class CartTest extends BaseTest {
         signInPage.authorization();
         inventoryPage.open();
         inventoryPage.inventoryPageIsOpen();
-        List<WebElement> addToCartButtonsList = driver.findElements(inventoryPage.addToCartButtons);
-        List<WebElement> itemsNamesList = driver.findElements(inventoryPage.itemsPrices);
+        List<WebElement> addToCartButtonsList = driver.findElements(InventoryPage.ADD_TO_CART_BUTTONS);
+        List<WebElement> itemsNamesList = driver.findElements(InventoryPage.ITEMS_PRICES);
         String firstItemPrice = itemsNamesList.get(0).getText();
         String firstItemPriceNumbers = firstItemPrice.substring(1);
         Double firstItemPriceNumbersDouble = null;
@@ -61,7 +63,7 @@ public class CartTest extends BaseTest {
         }
         addToCartButtonsList.get(0).click();
         cartpage.clickOnCartLink();
-        String addedItemPrice = driver.findElement(cartpage.addedToCartItemPrice)
+        String addedItemPrice = driver.findElement(CartPage.ADDEED_TO_CART_ITEM_PRICE)
                 .getText();
         String addedItemPriceNumbers = addedItemPrice.substring(1);
         Double addedItemPriceDouble = null;
