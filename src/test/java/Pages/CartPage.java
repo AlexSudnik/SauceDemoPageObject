@@ -23,10 +23,6 @@ public class CartPage extends BasePage {
         driver.get(CART_URL);
     }
 
-    public boolean cartPageIsOpen() {
-        return driver.findElement(CART_TITLE).isDisplayed();
-    }
-
     public boolean isCheckoutButtonDisplayed() {
         return driver.findElement(CHECKOUT_BUTTON).isDisplayed();
     }
