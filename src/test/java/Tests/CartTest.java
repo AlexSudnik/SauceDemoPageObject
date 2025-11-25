@@ -15,7 +15,6 @@ public class CartTest extends BaseTest {
     void checkoutButtonIsDisplayed() {
         signInPage.authorization();
         cartpage.open();
-        cartpage.cartPageIsOpen();
 
         assertTrue(cartpage.isCheckoutButtonDisplayed(), "кнопка Checkout не отображается");
     }
@@ -24,7 +23,6 @@ public class CartTest extends BaseTest {
     void continueShoppingButtonIsDisplayed() {
         signInPage.authorization();
         cartpage.open();
-        cartpage.cartPageIsOpen();
 
         assertTrue(cartpage.isContinueShoppingButtonDisplayed(), "кнопка Continue Shopping не отображается");
     }
