@@ -9,7 +9,6 @@ import java.util.List;
 public class InventoryPage extends BasePage {
 
     private static final By TITLE = By.xpath("//span[@data-test='title' and text()='Products']");
-    protected final String INVENTORY_URL = "https://www.saucedemo.com/inventory.html";
     public By CART_LINK = By.cssSelector(".shopping_cart_link");
     private static final By PRODUCTS_ON_INVENTORY_TITLES = By.cssSelector(".inventory_item_description");
     private static final By PRODUCTS_ON_INVENTORY_PRICES = By.cssSelector(".inventory_item_price");
