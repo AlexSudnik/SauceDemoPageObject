@@ -1,9 +1,9 @@
-package Tests;
+package tests;
 
-import Pages.CartPage;
-import Pages.InventoryPage;
+import pages.CartPage;
+import pages.InventoryPage;
 
-import Pages.Utils.FormatingUtils;
+import pages.utils.FormatingUtils;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 

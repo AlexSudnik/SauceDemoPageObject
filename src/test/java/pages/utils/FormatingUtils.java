@@ -1,4 +1,4 @@
-package Pages.Utils;
+package pages.utils;
 
 public class FormatingUtils {
     public static double parseDouble(String priceInTextFormat){
